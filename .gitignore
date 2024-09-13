@@ -1,0 +1,72 @@
+# Next.js (frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.DS_Store
+frontend/*.pem
+frontend/.env*.local
+
+# 프론트엔드 빌드 출력
+frontend/.vercel
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# FastAPI (backend)
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/.env
+backend/venv/
+backend/.venv
+backend/env/
+backend/ENV/
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+
+# 데이터베이스
+*.sqlite3
+*.db
+
+# 로그 파일
+*.log
+
+# OS 생성 파일
+.DS_Store
+Thumbs.db
+
+# 에디터 디렉토리 및 파일
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 임시 파일
+*.bak
+*.tmp
+*.temp
+
+# Python 바이트코드
+__pycache__/
+*.py[cod]
+
+# 가상 환경
+.env
+.venv
+env/
+venv/
+ENV/
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 기타
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.zip
