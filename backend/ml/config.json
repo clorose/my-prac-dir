@@ -1,0 +1,20 @@
+{
+    "models": [
+      {
+        "name": "XG",
+        "params": {
+          "n_estimators": 100,
+          "max_depth": 3,
+          "learning_rate": 0.1
+        }
+      },
+      {
+        "name": "KNN",
+        "params": {
+          "n_neighbors": 5
+        }
+      }
+    ],
+    "preprocess_methods": ["none", "delete", "mean", "median", "mode", "knn"],
+    "default_preprocess_method": "knn"
+  }
