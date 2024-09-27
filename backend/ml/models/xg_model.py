@@ -1,12 +1,8 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, f1_score, roc_auc_score
-from ml.preprocessing.data_preprocessing import preprocess_data
-from ml.utils.visualization import plot_3d_scatter
 
 class XGModel:
     def __init__(self):
@@ -22,19 +18,13 @@ class XGModel:
         self.id_material_test = None
         self.target_column = 'Defect_Flag'
 
-    def load_data_and_train_model(self, data_file_path, preprocess_method='none', **model_params):
+    def load_data_and_train_model(self, X, y, id_material, **model_params):
         try:
-            # 데이터 로드
-            data = pd.read_csv(data_file_path)
-            self.id_material = data.iloc[:, :2]
-            self.features = data.columns[2:-1]
-            self.X = data[self.features]
-            self.y = data[self.target_column]
+            self.X_processed = X
+            self.y_processed = y
+            self.id_material = id_material
+            self.features = X.columns
             
-            # 데이터 전처리
-            self.X_processed, self.y_processed, self.id_material = preprocess_data(self.X, self.y, self.id_material, method=preprocess_method)
-            
-            # 데이터 분할
             X_train, self.X_test, y_train, self.y_test, id_material_train, self.id_material_test = train_test_split(
                 self.X_processed, self.y_processed, self.id_material, test_size=0.2, random_state=42)
 
@@ -58,8 +48,6 @@ class XGModel:
             self.model = XGBClassifier(**default_params)
             self.model.fit(X_train, y_train)
 
-            # 데이터 정보 출력
-            print(f"원본 데이터 shape: {data.shape}")
             print(f"전처리 후 데이터 shape: {self.X_processed.shape}")
             print(f"Number of samples in training set: {len(X_train)}")
             print(f"Number of samples in test set: {len(self.X_test)}")
@@ -92,9 +80,6 @@ class XGModel:
         importance = self.model.feature_importances_
         importance = 100.0 * (importance / importance.max())
         return dict(sorted(zip(self.features, importance), key=lambda x: x[1], reverse=True))
-
-    def plot_3d_scatter(self):
-        plot_3d_scatter(self.X_processed, self.y_processed, self.features)
 
     def save_processed_data_to_csv(self, output_path):
         try:

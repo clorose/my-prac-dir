@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, f1_score, roc_auc_score
 
-class KNNModel:
+class RFModel:
     def __init__(self):
         self.model = None
         self.X = None
@@ -16,7 +16,7 @@ class KNNModel:
         self.y_processed = None
         self.id_material = None
         self.id_material_test = None
-        self.target_column = 'Defect_Flag'
+        self.target_column = 'Quality_Result'
 
     def load_data_and_train_model(self, X, y, id_material, **model_params):
         try:
@@ -24,14 +24,19 @@ class KNNModel:
             self.y_processed = y
             self.id_material = id_material
             self.features = X.columns
-            
+
             X_train, self.X_test, y_train, self.y_test, id_material_train, self.id_material_test = train_test_split(
                 self.X_processed, self.y_processed, self.id_material, test_size=0.2, random_state=42)
 
-            default_params = {'n_neighbors': 5, 'n_jobs': -1}
+            default_params = {
+                'n_estimators': 100,
+                'max_depth': 10,
+                'random_state': 42,
+                'n_jobs': -1
+            }
             default_params.update(model_params)
 
-            self.model = KNeighborsClassifier(**default_params)
+            self.model = RandomForestClassifier(**default_params)
             self.model.fit(X_train, y_train)
 
             print(f"전처리 후 데이터 shape: {self.X_processed.shape}")
@@ -61,6 +66,11 @@ class KNNModel:
         except Exception as e:
             print(f"An error occurred while getting model performance: {e}")
             raise
+
+    def get_feature_importance(self):
+        importance = self.model.feature_importances_
+        importance = 100.0 * (importance / importance.max())
+        return dict(sorted(zip(self.features, importance), key=lambda x: x[1], reverse=True))
 
     def save_processed_data_to_csv(self, output_path):
         try:
