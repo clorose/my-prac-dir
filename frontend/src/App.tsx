@@ -1,13 +1,9 @@
-import './App.css';
-import ApiTest from './components/api_test';
+// import './App.css';
+// import Router from './router/router.js';
 
-const App = (): JSX.Element => {
-  return (
-    <div className="App">
-      <h1>FastAPI + React Integration Test</h1>
-      <ApiTest />
-    </div>
-  );
-};
+// const App = (): JSX.Element => {
+//   return <Router />
 
-export default App;
+// };
+
+// export default App;

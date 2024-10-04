@@ -22,6 +22,6 @@
         }
       }
     ],
-    "preprocess_methods": ["none", "delete", "mean", "median", "mode", "knn", "scale", "remove_outliers", "log_transform", "onehot_encode"],
+    "preprocess_methods": ["none", "delete", "mean", "median", "mode", "knn", "scale", "remove_outliers", "log_transform"],
     "default_preprocess_method": "knn"
   }

@@ -3,5 +3,10 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "jsx": "react-jsx", // JSX 구문 처리를 위한 옵션
+    "esModuleInterop": true
+  }
 }

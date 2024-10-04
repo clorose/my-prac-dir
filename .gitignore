@@ -67,3 +67,6 @@ yarn-error.log*
 *.pid
 *.gz
 *.zip
+
+# 와이어프레임 폴더
+frontend/wireFrame/
