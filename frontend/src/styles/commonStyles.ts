@@ -1,3 +1,7 @@
+// File: C:\_YHJ\fast\frontend\src\styles\commonStyles.ts
+// Module: commonStyles
+// TypeScript Module
+
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
@@ -44,4 +48,22 @@ export const CardTitle = styled.h2`
 
 export const CardContent = styled.div`
   padding: 1.5rem;
+`;
+
+export const NavBar = styled.nav`
+  width: 100%;
+  background-color: #1f2937;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+`;
+
+export const NavLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
 `;

@@ -94,4 +94,4 @@ def generate_machine_data(num_rows):
     print(f"\n{num_rows} rows of data have been generated in '{file_path}'")
 
 # 10만 행의 데이터 생성
-generate_machine_data(100000)
+generate_machine_data(1000)

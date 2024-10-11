@@ -1,3 +1,7 @@
+// File: C:\_YHJ\fast\frontend\src\components\RecentUploads\RecentUploads.tsx
+// Component: RecentUploads
+// TypeScript React Component
+
 import styled from 'styled-components';
 import { File, CheckCircle, AlertCircle } from 'lucide-react';
 import Card from '../ui/Card';

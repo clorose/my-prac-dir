@@ -1,4 +1,7 @@
-// src/components/ui/Card.tsx
+// File: C:\_YHJ\fast\frontend\src\components\ui\Card.tsx
+// Component: Card
+// TypeScript React Component
+
 import React from 'react';
 import styled from 'styled-components';
 

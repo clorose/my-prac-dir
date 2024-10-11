@@ -1,0 +1,161 @@
+# File: C:\_YHJ\fast\backend\ml\main.py
+# Purpose: [Describe the purpose of this file]
+
+import os
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_root))
+
+import json
+import pandas as pd
+import numpy as np
+import time
+from sklearn.metrics import classification_report
+from ml.models.xgb.xg_model import XGModel
+from ml.models.knn.knn_model import KNNModel
+from ml.models.rf.rf_model import RFModel
+from ml.preprocessing.data_preprocessing import apply_preprocessing_pipeline, print_data_ranges, ConsistentLabelEncoder, check_negative_values, essential_preprocessing
+from ml.utils.visualization import visualize_data
+from datetime import datetime
+
+def load_config():
+    config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+    with open(config_path, 'r') as file:
+        config = json.load(file)
+    return config
+
+def load_model_class(model_name):
+    if model_name.lower() == 'xg':
+        return XGModel
+    elif model_name.lower() == 'knn':
+        return KNNModel
+    elif model_name.lower() == 'rf':
+        return RFModel
+    else:
+        raise ValueError(f"Unknown model: {model_name}")
+
+def run_model(data_file_path):
+    config = load_config()
+    model_config = config['models'][0]  # Assuming the first model in config for simplicity
+    model_class = load_model_class(model_config['name'])
+    model = model_class()
+    try:
+        start_time = time.time()
+        
+        data = pd.read_csv(data_file_path)
+        print(f"Original data shape: {data.shape}")
+        print(f"Original data null counts:\n{data.isnull().sum()}")
+        
+        id_material_columns = ['Timestamp', 'Machine_ID', 'Material_Type']
+        id_material = data[id_material_columns]
+
+        target_column = 'Quality_Result'
+        features = [col for col in data.columns if col not in id_material_columns + [target_column, 'Defect_Type']]
+        X = data[features].copy()
+        y = data[target_column]
+
+        print(f"X shape before preprocessing: {X.shape}")
+        print(f"X null counts before preprocessing:\n{X.isnull().sum()}")
+
+        # Apply essential preprocessing
+        X_processed, y_processed, id_material_processed = essential_preprocessing(X, y, id_material)
+        
+        print(f"X shape after essential preprocessing: {X_processed.shape}")
+        print(f"X null counts after essential preprocessing:\n{X_processed.isnull().sum()}")
+        
+        # Apply additional preprocessing methods
+        X_processed, y_processed, id_material_processed = apply_preprocessing_pipeline(
+            X_processed, y_processed, id_material_processed,
+            [config['default_preprocess_method']]
+        )
+
+        print(f"X shape after additional preprocessing: {X_processed.shape}")
+        print(f"X null counts after additional preprocessing:\n{X_processed.isnull().sum()}")
+
+        check_negative_values(X_processed)
+
+        # Fill null values
+        X_processed = X_processed.fillna(X_processed.mean())
+        y_processed = y_processed.fillna(y_processed.mode()[0])
+
+        print(f"X shape after filling null values: {X_processed.shape}")
+        print(f"X null counts after filling null values:\n{X_processed.isnull().sum()}")
+
+        model.load_data_and_train_model(X_processed, y_processed, id_material_processed, **model_config.get('params', {}))
+
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        
+        accuracy, f1, auc, report = model.get_model_performance()
+        
+        if hasattr(model, 'get_feature_importance'):
+            feature_importance_dict = model.get_feature_importance()
+            features = list(feature_importance_dict.keys())
+            feature_importances = list(feature_importance_dict.values())
+        else:
+            feature_importances = None
+            features = X_processed.columns.tolist()
+
+        currentTime = datetime.now().strftime("%H%M%S")
+        output_path = Path(__file__).parent / 'output' / f"processed_data_{model_class.__name__}_{currentTime}.csv"
+        save_results(model, X_processed, y_processed, id_material_processed, output_path)
+        
+        model_save_path = Path(__file__).parent / 'output' / f"{model_class.__name__}_model_{currentTime}.joblib"
+        model.save_model(str(model_save_path))
+        print(f"Model Save to {model_save_path}")
+
+        print_data_ranges(X_processed)
+        
+        return {
+            "accuracy": accuracy,
+            "f1_score": f1,
+            "auc": auc,
+            "classification_report": report,
+            "elapsed_time": elapsed_time
+        }
+    except Exception as e:
+        print(f"An error occurred in model execution: {e}")
+        import traceback
+        traceback.print_exc()
+        return {"error": str(e), "success": False}
+    
+    return {
+        "accuracy": accuracy,
+        "f1_score": f1,
+        "auc": auc,
+        "classification_report": report,
+        "success": True
+    }
+    
+
+def save_results(model, X_processed, y_processed, id_material_processed, output_path):
+    encoder = ConsistentLabelEncoder()
+    X_original = X_processed.copy()
+    X_original = encoder.inverse_transform(X_original)
+
+    results = pd.concat([id_material_processed.reset_index(drop=True), X_original.reset_index(drop=True)], axis=1)
+    results['actual_target'] = y_processed.reset_index(drop=True)
+    results['predicted_target'] = model.predict(X_processed)
+
+    print(f"Results shape before saving: {results.shape}")
+    print(f"Results null counts before saving:\n{results.isnull().sum()}")
+
+    results.to_csv(output_path, index=False)
+    print(f"Results saved to {output_path}")
+    print(f"Number of rows in processed data: {len(results)}")
+
+def get_analysis_result():
+    # Placeholder function to get analysis results, replace with actual implementation
+    return {"status": "Analysis result retrieval not implemented."}
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Run machine learning models with preprocessing.")
+    parser.add_argument('data_file_path', type=str, help="Path to the data file to be analyzed")
+    args = parser.parse_args()
+
+    config = load_config()
+    model_config = config['models'][0]
+    run_model(args.data_file_path)

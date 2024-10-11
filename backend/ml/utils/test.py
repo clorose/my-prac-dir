@@ -11,6 +11,6 @@ plt.rcParams['axes.unicode_minus'] = False
 plt.figure()
 plt.plot([1, 2, 3], [4, 5, 6])
 plt.title('한글 제목 테스트', fontproperties=fontprop)
-plt.xlabel('X축 레이블', fontproperties=fontprop)
+plt.xlabel('X축 레이블', fontproperties=        fontprop)
 plt.ylabel('Y축 레이블', fontproperties=fontprop)
 plt.show()

@@ -1,3 +1,7 @@
+// File: C:\_YHJ\fast\frontend\src\pages\mainPage\mainPage.tsx
+// Component: mainPage
+// TypeScript React Component
+
 import FileUpload from '../../components/FileUpload/FileUpload';
 import RecentUploads from '../../components/RecentUploads/RecentUploads';
 import { PageContainer, Header, HeaderContent, Title, MainContent } from '../../styles/commonStyles';

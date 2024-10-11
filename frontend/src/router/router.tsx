@@ -1,35 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
-import MainPage from "../pages/mainPage/mainPage";
-import PerformancePage from "../pages/performancePage/PerformancePage";
-import RangesPage from "../pages/rangesPage/RangesPage";
-import VisualsPage from "../pages/visualPage/VisualsPage";
-import NotFoundPage from "../pages/notFoundPage/notFoundPage";
+// File: C:\_YHJ\fast\frontend\src\router\router.tsx
+
+import { createBrowserRouter } from 'react-router-dom';
+import MainPage from '../pages/mainPage/mainPage';
+import DashboardPage from '../pages/dashBoardPage/dashBoardPage';
+import NotFoundPage from '../pages/notFoundPage/notFoundPage';
+import TestPage from '../pages/testPage/testPage';
+import ModelViewer from '../pages/modelPage/modelPage';
+import Layout from '../components/Layout/layout';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <MainPage />,
-    errorElement: <NotFoundPage />,
+    path: '/',
+    element: <Layout />,  // 공통 레이아웃 적용
     children: [
-      {
-        path: "performance",
-        element: <PerformancePage />,
-      },
-      {
-        path: "ranges",
-        element: <RangesPage />,
-      },
-      {
-        path: "visuals",
-        element: <VisualsPage />,
-      },
+      { path: '', element: <MainPage /> },
+      { path: 'dashboard', element: <DashboardPage /> },
+      { path: 'test', element: <TestPage /> },
+      { path: 'model', element: <ModelViewer /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ]);
-
-// Router 컴포넌트는 더 이상 필요하지 않으므로 제거할 수 있습니다.
-// const Router = () => {
-//   return <RouterProvider router={router} />;
-// };
-// 
-// export default Router;

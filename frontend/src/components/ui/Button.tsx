@@ -1,3 +1,7 @@
+// File: C:\_YHJ\fast\frontend\src\components\ui\Button.tsx
+// Component: Button
+// TypeScript React Component
+
 import styled from 'styled-components';
 
 const StyledButton = styled.button`

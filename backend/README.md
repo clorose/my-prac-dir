@@ -32,6 +32,15 @@
    pip install -r requirements.txt
    ```
 
+4. 프로젝트 루트 디렉토리에 `.env` 파일을 생성하고 다음 내용을 추가합니다:
+   ```
+   PYTHONPATH=/path/to/your/project/backend
+   HOST=127.0.0.1
+   PORT=8000
+   ALLOWED_ORIGINS=http://localhost:3000
+   ```
+   주의: 위의 값들은 예시입니다. 실제 환경에 맞게 적절히 수정해야 합니다.
+
 ## 실행 방법
 
 프로젝트의 메인 함수를 실행하여 데이터 분석 및 모델 학습을 시작할 수 있습니다:
@@ -45,38 +54,43 @@ python main.py
 ## 프로젝트 구조
 
 ```
-C:\_YHJ\fast\backend\ml\
+/path/to/your/project/backend/
 │
-├── output\
-│   ├── processed_data_XGModel_120915.csv
-│   ├── processed_data_RFModel_121114.csv
-│   ├── processed_data_RFModel_120758.csv
+├── .env
+│
+├── ml/
+│   ├── output/
+│   │   ├── processed_data_XGModel_120915.csv
+│   │   ├── processed_data_RFModel_121114.csv
+│   │   ├── processed_data_RFModel_120758.csv
+│   │   └── __init__.py
+│   │
+│   ├── data/
+│   │   ├── Machine_Tool_Data.csv
+│   │   └── __init__.py
+│   │
+│   ├── models/
+│   │   ├── __pycache__/
+│   │   ├── xg_model.py
+│   │   ├── rf_model.py
+│   │   ├── knn_model.py
+│   │   └── __init__.py
+│   │
+│   ├── utils/
+│   │   ├── __pycache__/
+│   │   ├── visualization.py
+│   │   └── __init__.py
+│   │
+│   ├── preprocessing/
+│   │   ├── __pycache__/
+│   │   ├── data_preprocessing.py
+│   │   └── __init__.py
+│   │
+│   ├── main.py
+│   ├── config.json
 │   └── __init__.py
 │
-├── data\
-│   ├── Machine_Tool_Data.csv
-│   └── __init__.py
-│
-├── models\
-│   ├── __pycache__\
-│   ├── xg_model.py
-│   ├── rf_model.py
-│   ├── knn_model.py
-│   └── __init__.py
-│
-├── utils\
-│   ├── __pycache__\
-│   ├── visualization.py
-│   └── __init__.py
-│
-├── preprocessing\
-│   ├── __pycache__\
-│   ├── data_preprocessing.py
-│   └── __init__.py
-│
-├── main.py
-├── config.json
-└── __init__.py
+└── README.md
 ```
 
 ## 데이터 설명
@@ -120,8 +134,7 @@ C:\_YHJ\fast\backend\ml\
 3. Final_Inspection_Result(27번)는 주요 목표 변수(target variable)로 사용됩니다.
 4. 모델은 1-26번 필드의 데이터를 바탕으로 Final_Inspection_Result를 예측하도록 학습됩니다.
 
-
-# 기계 가공 데이터 CSV 구조
+## 기계 가공 데이터 CSV 구조
 
 | 열 이름               | 데이터 유형 | 설명                                  | 예시 값              |
 |-----------------------|-------------|---------------------------------------|----------------------|

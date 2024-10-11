@@ -6,6 +6,7 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 import { UploadCloud } from 'lucide-react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import { CardHeader, CardTitle, CardContent } from '../../styles/commonStyles';
@@ -17,6 +18,7 @@ const FileUpload = (): JSX.Element => {
   const [uploadStatus, setUploadStatus] = useState<string>('');
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [statusCode, setStatusCode] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const isCSVFile = (file: File): boolean => {
     return file.type === 'text/csv' || file.name.toLowerCase().endsWith('.csv');
@@ -52,13 +54,16 @@ const FileUpload = (): JSX.Element => {
     try {
       const response = await axios.post(`${SERVER_URL}/upload`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
         },
-        timeout: 300000 // 5분 타임아웃
+        timeout: 300000, // 5 minutes timeout
       });
 
       setStatusCode(response.status);
       setUploadStatus(`${response.data.status} File: ${response.data.filename}`);
+
+      // Navigate to TestPage with analysisResult as state
+      navigate('/test', { state: response.data });
     } catch (error) {
       console.error('Error uploading file:', error);
       if (axios.isAxiosError(error)) {

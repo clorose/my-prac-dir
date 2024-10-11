@@ -6,8 +6,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router/router'; // Router.tsx에서 export한 router를 import
-import './index.css';
-import './App.css';
+import './reset.css';
+import './globalStyle.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
