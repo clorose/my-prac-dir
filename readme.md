@@ -1,5 +1,5 @@
 ```bash
-weather_forecast/
+weather/
 ├── app/                      # 메인 애플리케이션 코드
 │   ├── api/                  # API 관련 코드
 │   │   ├── __init__.py      # Python 패키지 선언
