@@ -1,6 +1,7 @@
 # File: C:\gaon\2024\weather\config.py
 # Purpose: [Describe the purpose of this file]
 # 신버전
+
 import os
 from dotenv import load_dotenv
 from pathlib import Path
