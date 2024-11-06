@@ -1,3 +1,6 @@
+# Path: D:\git\weather\legacy\climate_prediction.py
+# Purpose: [Describe the purpose of this file]
+
 import numpy as np
 import pandas as pd
 import aiohttp
@@ -32,10 +35,10 @@ logger = logging.getLogger(__name__)
 class ClimatePredictor:
     def __init__(self):
         """기후 예측 시스템 초기화"""
-        self._initialize_paths()
-        self._initialize_api_settings()
-        self.scaler = MinMaxScaler()
-        self.model = None
+        self._initialize_paths()  # 경로 초기화
+        self._initialize_api_settings()  # API 설정 초기화
+        self.scaler = MinMaxScaler()  # 데이터 정규화를 위한 스케일러
+        self.model = None  # 머신러닝 모델
 
     def _initialize_paths(self) -> None:
         """경로 설정 초기화"""
@@ -57,7 +60,15 @@ class ClimatePredictor:
     async def _get_monthly_data_async(
         self, year: int, month: int, session: aiohttp.ClientSession
     ) -> Optional[List[Dict]]:
-        """특정 연월의 기후 데이터 비동기 조회"""
+        """
+        특정 연월의 기후 데이터를 비동기적으로 조회
+        Args:
+            year: 조회할 연도
+            month: 조회할 월
+            session: aiohttp 세션
+        Returns:
+            기후 데이터 리스트 또는 None
+        """
         params = {
             "pageNo": "1",
             "numOfRows": "999",
@@ -178,7 +189,16 @@ class ClimatePredictor:
     def prepare_model_data(
         self, df: pd.DataFrame, sequence_length: int = Config.MONTH_SEQUENCE_LENGTH
     ) -> Tuple[np.ndarray, np.ndarray, str]:
-        """모델 학습용 데이터 준비"""
+        """
+        모델 학습용 데이터 준비
+        Args:
+            df: 원본 데이터프레임
+            sequence_length: 시퀀스 길이
+        Returns:
+            X: 입력 데이터
+            y: 타겟 데이터
+            last_date: 마지막 데이터 날짜
+        """
         if df.empty:
             raise ValueError("Empty DataFrame provided")
 
@@ -208,7 +228,13 @@ class ClimatePredictor:
         return X, y, df_seoul["date"].iloc[-1]
 
     def build_model(self, input_shape: Tuple[int, int]) -> Sequential:
-        """LSTM 모델 구축"""
+        """
+        LSTM 모델 구축
+        Args:
+            input_shape: 입력 데이터 형태
+        Returns:
+            구축된 LSTM 모델
+        """
         model = Sequential(
             [
                 LSTM(Config.LSTM_UNITS, return_sequences=True, input_shape=input_shape),
@@ -252,7 +278,7 @@ class ClimatePredictor:
 
             from joblib import load
             self.scaler = load(self.scaler_file)
-
+            # 커스텀 오브젝트
             custom_objects = {"MeanSquaredError": keras.losses.MeanSquaredError}
             model = load_model(self.model_file, custom_objects=custom_objects)
 
@@ -269,7 +295,15 @@ class ClimatePredictor:
     def predict_future(
         self, model: Sequential, last_sequence: np.ndarray, steps: int = Config.PREDICTION_MONTHS
     ) -> Optional[np.ndarray]:
-        """미래 기후 예측"""
+        """
+        미래 기후 예측
+        Args:
+            model: 학습된 모델
+            last_sequence: 마지막 시퀀스 데이터
+            steps: 예측할 개월 수
+        Returns:
+            예측된 기후 데이터
+        """
         if last_sequence is None:
             logger.error("No sequence data for prediction")
             return None
@@ -293,6 +327,13 @@ class ClimatePredictor:
 
 
 def main():
+    """
+    메인 실행 함수
+    1. 모델 로드 또는 새로운 모델 학습
+    2. 데이터 수집 및 전처리
+    3. 모델 학습 (필요한 경우)
+    4. 미래 기후 예측
+    """
     predictor = ClimatePredictor()
 
     try:
