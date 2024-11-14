@@ -1,0 +1,58 @@
+# 운영체제별 무시 파일
+.DS_Store            # macOS
+Thumbs.db            # Windows
+desktop.ini          # Windows
+._*                  # macOS
+
+# 로그 파일
+*.log
+
+# 환경 변수 및 설정 파일
+.env
+
+# 바이너리 파일
+*.exe
+*.dll
+*.so
+*.dylib
+
+# 컴파일된 파일
+*.class
+*.o
+*.out
+
+# 디렉터리
+node_modules/
+vendor/
+
+# IDE 관련 파일
+.idea/
+.vscode/
+*.iml
+
+# 가상환경 관련
+.venv/
+
+# TypeScript/JavaScript 빌드 결과물
+dist/
+build/
+out/
+
+# 패키지 매니저 관련
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+# Python 관련
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# 모델 저장 폴더
+climate_model/
+
+# DS_Store 파일 무시
+**/.DS_Store
