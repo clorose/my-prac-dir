@@ -125,6 +125,7 @@ class ClimatePredictor:
         data = []
         for idx, info in enumerate(root.findall(".//info")):
             try:
+
                 def safe_float(value: Optional[str], field_name: str) -> float:
                     if not value or value == "null":
                         return 0.0
@@ -140,7 +141,7 @@ class ClimatePredictor:
                     "avg_temp": safe_float(info.findtext("taavg"), "avg_temp"),
                     "max_temp": safe_float(info.findtext("tamax"), "max_temp"),
                     "min_temp": safe_float(info.findtext("tamin"), "min_temp"),
-                    "humidity": safe_float(info.findtext("avghm"), "humidity")
+                    "humidity": safe_float(info.findtext("avghm"), "humidity"),
                 }
 
                 if not row["station"]:
@@ -222,6 +223,7 @@ class ClimatePredictor:
 
         # scaler 저장
         from joblib import dump
+
         dump(self.scaler, self.scaler_file)
         logger.info("Scaler saved to %s", self.scaler_file)
 
@@ -283,6 +285,7 @@ class ClimatePredictor:
                 return None, None, None
 
             from joblib import load
+
             self.scaler = load(self.scaler_file)
             # 커스텀 오브젝트
             custom_objects = {"MeanSquaredError": keras.losses.MeanSquaredError}
@@ -405,7 +408,7 @@ def main():
         for i, pred in enumerate(predictions, 1):
             future_date = last_date + pd.DateOffset(months=i)
             pred_str = ", ".join(f"{feature}: {value:.1f}" for feature, value in zip(features, pred))
-            logger.info("%s: %s", future_date.strftime('%Y-%m'), pred_str)
+            logger.info("%s: %s", future_date.strftime("%Y-%m"), pred_str)
 
     except ValueError as e:
         logger.error("Value Error: %s", str(e))

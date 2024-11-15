@@ -107,33 +107,21 @@ if weather_data:
     root = parse_weather_data(weather_data)
 
     # 1. 가장 더웠던 도시와 가장 덜 더웠던 도시의 기온 차이 계산
-    hottest_city, hottest_temp, coldest_city, coldest_temp = (
-        find_hottest_and_coldest_cities(root)
-    )
+    hottest_city, hottest_temp, coldest_city, coldest_temp = find_hottest_and_coldest_cities(root)
     if hottest_city and coldest_city:
         temp_diff = hottest_temp - coldest_temp
-        print(
-            f"The hottest city is {hottest_city} with a max temperature of {hottest_temp}°C."
-        )
-        print(
-            f"The coldest city is {coldest_city} with a min temperature of {coldest_temp}°C."
-        )
-        print(
-            f"The temperature difference between {hottest_city} and {coldest_city} is {temp_diff}°C."
-        )
+        print(f"The hottest city is {hottest_city} with a max temperature of {hottest_temp}°C.")
+        print(f"The coldest city is {coldest_city} with a min temperature of {coldest_temp}°C.")
+        print(f"The temperature difference between {hottest_city} and {coldest_city} is {temp_diff}°C.")
 
     # 2. 가장 평범한 도시 찾기
     city, median_temp = find_most_average_temp_city(root)
-    print(
-        f"The city with the most average temperature is {city} with a temperature of {median_temp}°C."
-    )
+    print(f"The city with the most average temperature is {city} with a temperature of {median_temp}°C.")
 
     # 3. 최고 기온과 최저 기온이 같은 도시 찾기
     cities_with_same_temps = find_cities_with_same_max_and_min_temp(root)
     if cities_with_same_temps:
-        print(
-            f"Cities where both max and min temperatures are the same: {', '.join(cities_with_same_temps)}."
-        )
+        print(f"Cities where both max and min temperatures are the same: {', '.join(cities_with_same_temps)}.")
     else:
         print("There are no cities where both max and min temperatures are the same.")
 else:

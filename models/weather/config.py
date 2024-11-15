@@ -8,18 +8,20 @@ from pathlib import Path
 import logging
 from datetime import datetime
 
+
 def find_project_root(current_path: Path = Path.cwd()) -> Path:
-    if (current_path / '.project_root').exists():
+    if (current_path / ".project_root").exists():
         return current_path
     parent = current_path.parent
     if parent == current_path:
         raise FileNotFoundError("Project root not found. Are you sure '.project_root' file exists?")
     return find_project_root(parent)
 
+
 # 프로젝트 루트 찾기
 try:
     project_root = find_project_root()
-    env_path = project_root / '.env'
+    env_path = project_root / ".env"
 
     load_dotenv(dotenv_path=env_path)
 
@@ -101,10 +103,7 @@ try:
             logging.basicConfig(
                 level=numeric_level,
                 format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-                handlers=[
-                    logging.FileHandler(cls.LOG_FILE),
-                    logging.StreamHandler()
-                ],
+                handlers=[logging.FileHandler(cls.LOG_FILE), logging.StreamHandler()],
             )
 
         @classmethod
