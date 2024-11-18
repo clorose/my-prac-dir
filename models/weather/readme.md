@@ -57,12 +57,14 @@ cd weather
 Linux/Mac:
 ```bash
 python -m venv .venv
+# 가상 환경 활성화
 source .venv/bin/activate
 ```
 
 Windows:
 ```bash
 python -m venv .venv
+# 가상 환경 활성화
 .venv\Scripts\activate
 ```
 
@@ -72,6 +74,10 @@ pip install -r requirements.txt
 ```
 
 4. 환경 변수 설정
+```bash
+touch .env
+```
+`.env` 파일에 아래 내용 추가
 ```bash
 WEATHER_API_KEY=your_api_key_here
 ```
@@ -88,7 +94,7 @@ deactivate
 
 ## 실행
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+python3 app.py
 ```
 
 - API 서버: `http://localhost:8000`

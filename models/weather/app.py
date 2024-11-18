@@ -1,3 +1,6 @@
+# path : models/weather/app.py
+# description : 날씨 예측 API 서버
+
 """
 날씨 예측 API 서버
 

@@ -1,8 +1,11 @@
-"""
-Climate prediction module for weather forecasting.
+# path : models/weather/predictor.py
+# description : 날씨 예측을 위한 예측 모듈
 
-This module provides functionality to build, train, and use LSTM models
-for predicting future weather patterns based on historical data.
+"""
+기후 예측을 위한 모듈입니다.
+
+이 모듈은 과거 데이터를 기반으로 미래 날씨 패턴을 예측하기 위한
+LSTM 모델을 구축, 훈련 및 사용하는 기능을 제공합니다.
 """
 
 import logging

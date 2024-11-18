@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>&#xc5f0;&#xad6c;&#xb178;&#xd2b8;</title>
+    <style>
+        /* From extension vscode.github */
+        /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+        .vscode-dark img[src$=\#gh-light-mode-only],
+        .vscode-light img[src$=\#gh-dark-mode-only],
+        .vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+        .vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+            display: none;
+        }
+    </style>
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+            --code-bg: #f1f5f9;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: var(--background-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        pre {
+            background: #011627;
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: #d6deeb;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        ul,
+        ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.8;
+        }
+
+        .markdown-alert {
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 다크 모드 지원 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #60a5fa;
+                --secondary-color: #93c5fd;
+                --background-color: #0f172a;
+                --text-color: #e2e8f0;
+                --code-bg: #1e293b;
+                --border-color: #334155;
+            }
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            pre {
+                padding: 1rem;
+            }
+        }
+    </style>
+    <style>
+        .task-list-item {
+            list-style-type: none;
+        }
+
+        .task-list-item-checkbox {
+            margin-left: -20px;
+            vertical-align: middle;
+            pointer-events: none;
+        }
+    </style>
+    <style>
+        :root {
+            --color-note: #0969da;
+            --color-tip: #1a7f37;
+            --color-warning: #9a6700;
+            --color-severe: #bc4c00;
+            --color-caution: #d1242f;
+            --color-important: #8250df;
+        }
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-note: #2f81f7;
+                --color-tip: #3fb950;
+                --color-warning: #d29922;
+                --color-severe: #db6d28;
+                --color-caution: #f85149;
+                --color-important: #a371f7;
+            }
+        }
+    </style>
+    <style>
+        .markdown-alert {
+            padding: 0.5rem 1rem;
+            margin-bottom: 16px;
+            color: inherit;
+            border-left: .25em solid #888;
+        }
+
+        .markdown-alert>:first-child {
+            margin-top: 0
+        }
+
+        .markdown-alert>:last-child {
+            margin-bottom: 0
+        }
+
+        .markdown-alert .markdown-alert-title {
+            display: flex;
+            font-weight: 500;
+            align-items: center;
+            line-height: 1
+        }
+
+        .markdown-alert .markdown-alert-title .octicon {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
+
+        .markdown-alert.markdown-alert-note {
+            border-left-color: var(--color-note);
+        }
+
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
+
+        .markdown-alert.markdown-alert-important {
+            border-left-color: var(--color-important);
+        }
+
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
+
+        .markdown-alert.markdown-alert-warning {
+            border-left-color: var(--color-warning);
+        }
+
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
+
+        .markdown-alert.markdown-alert-tip {
+            border-left-color: var(--color-tip);
+        }
+
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
+
+        .markdown-alert.markdown-alert-caution {
+            border-left-color: var(--color-caution);
+        }
+
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
+    </style>
+
+    <style>
+        /* Night Owl 문법 하이라이팅 */
+        .hljs-keyword {
+            color: #c792ea;
+            font-style: italic;
+        }
+
+        .hljs-built_in {
+            color: #82aaff;
+        }
+
+        .hljs-string {
+            color: #ecc48d;
+        }
+
+        .hljs-comment {
+            color: #637777;
+            font-style: italic;
+        }
+
+        .hljs-function {
+            color: #82aaff;
+        }
+
+        .hljs-title {
+            color: #7fdbca;
+        }
+
+        .hljs-params {
+            color: #d6deeb;
+        }
+
+        .hljs-number {
+            color: #f78c6c;
+        }
+
+        .hljs-punctuation {
+            color: #d9f5dd;
+        }
+
+        .hljs-attr {
+            color: #addb67;
+        }
+
+        .hljs-meta {
+            color: #82aaff;
+        }
+
+        .hljs-literal {
+            color: #ff5874;
+        }
+
+        .hljs-subst {
+            color: #d3423e;
+        }
+
+        /* 코드 블록 스크롤바 스타일링 */
+        pre::-webkit-scrollbar {
+            height: 8px;
+            background-color: #011627;
+        }
+
+        pre::-webkit-scrollbar-thumb {
+            background: #234d70;
+            border-radius: 4px;
+        }
+
+        pre::-webkit-scrollbar-track {
+            background: #011627;
+        }
+
+        /* 다크 모드에서도 동일한 코드 블록 스타일 유지 */
+        @media (prefers-color-scheme: dark) {
+            pre {
+                background: #011627;
+                color: #d6deeb;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="vscode-body vscode-light">
+    <h1 id="연구노트">연구노트</h1>
+    <h1 id="시작하기">시작하기</h1>
+    <p>이 프로젝트는 LSTM 모델을 활용한 날씨 예측 시스템입니다.</p>
+    <h2 id="프로젝트-클론">프로젝트 클론</h2>
+    <pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/clorose/lstm-java.git
+</code></pre>
+    <h1 id="챕터-1-시스템-구성-요소-및-환경-설정">챕터 1. 시스템 구성 요소 및 환경 설정</h1>
+    <h2 id="1-프론트엔드-nextjs">1. 프론트엔드 (Next.js)</h2>
+    <h3 id="프로젝트-구조">프로젝트 구조</h3>
+    <pre><code>src/
+├── app/
+│   ├── page.tsx        # API 테스트 페이지
+│   └── weather/        
+│       └── page.tsx    # 날씨 예측 데이터 표시 페이지
+</code></pre>
+    <h3 id="주요-기술">주요 기술</h3>
+    <ul>
+        <li>Next.js 14</li>
+        <li>TypeScript</li>
+        <li>Tailwind CSS</li>
+    </ul>
+    <h3 id="실행-방법nextjs">실행 방법(Next.js)</h3>
+    <pre><code class="language-bash"><span class="hljs-comment"># 패키지 설치</span>
+pnpm install
+
+<span class="hljs-comment"># 개발 서버 실행</span>
+pnpm dev
+</code></pre>
+    <h2 id="2-백엔드-spring-boot">2. 백엔드 (Spring Boot)</h2>
+    <h3 id="프로젝트-구조-1">프로젝트 구조</h3>
+    <pre><code>src/main/kotlin/com/gaon/lstm/
+├── LstmApplication.kt          # 애플리케이션 진입점
+└── WeatherController.kt        # 날씨 데이터 중계 컨트롤러
+</code></pre>
+    <h3 id="주요-기술-1">주요 기술</h3>
+    <ul>
+        <li>Spring Boot 3.2</li>
+        <li>Kotlin</li>
+        <li>RestTemplate</li>
+    </ul>
+    <h3 id="실행-방법">실행 방법</h3>
+    <ol>
+        <li>
+            <p>IntelliJ IDEA 사용 시</p>
+            <ul>
+                <li>Project를 IntelliJ IDEA로 열기</li>
+                <li><code>src/main/kotlin/com/gaon/lstm/LstmApplication.kt</code> 파일 열기</li>
+                <li>Run 버튼(▶️) 클릭하여 실행</li>
+            </ul>
+        </li>
+        <li>
+            <p>터미널 사용 시</p>
+        </li>
+    </ol>
+    <pre><code class="language-bash"><span class="hljs-comment"># Maven Wrapper 사용</span>
+./mvnw spring-boot:run
+
+<span class="hljs-comment"># 또는 Gradle Wrapper 사용</span>
+./gradlew bootRun
+</code></pre>
+    <h2 id="3-예측-모델-fastapi">3. 예측 모델 (FastAPI)</h2>
+    <h3 id="프로젝트-구조-2">프로젝트 구조</h3>
+    <pre><code>weather/
+├── app/                      # 메인 애플리케이션 코드
+│   ├── api/                  # API 관련 코드
+│   ├── core/                # 핵심 설정
+│   ├── models/              # ML 모델 클래스
+│   ├── services/            # 비즈니스 로직
+│   └── utils/               # 유틸리티 함수
+├── data/                    # 데이터 저장소
+├── tests/                   # 테스트 코드
+└── requirements.txt        # 의존성 목록
+</code></pre>
+    <h3 id="실행-요구사항">실행 요구사항</h3>
+    <ul>
+        <li>Python 3.8+</li>
+        <li>가상환경</li>
+        <li>환경 변수 설정</li>
+    </ul>
+    <h3 id="실행-방법-1">실행 방법</h3>
+    <ol>
+        <li>가상환경 생성 및 활성화</li>
+    </ol>
+    <p>macOS</p>
+    <pre><code class="language-bash">python -m venv .venv
+<span class="hljs-built_in">source</span> .venv/bin/activate  <span class="hljs-comment"># Windows: .venv\Scripts\activate</span>
+</code></pre>
+    <p>Windows</p>
+    <pre><code class="language-bash">python -m venv .venv
+.venv\Scripts\activate
+</code></pre>
+    <ol start="2">
+        <li>의존성 설치</li>
+    </ol>
+    <pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+    <ol start="3">
+        <li>환경 변수 설정</li>
+    </ol>
+    <ul>
+        <li><code>.env</code> 파일 생성 후 아래 내용 추가, 내용 양식은 .env.example 참고</li>
+    </ul>
+    <p>Windows</p>
+    <pre><code class="language-powershell"><span class="hljs-comment"># PowerShell 사용 시</span>
+<span class="hljs-built_in">New-Item</span> <span class="hljs-literal">-ItemType</span> File <span class="hljs-literal">-Path</span> .env
+
+<span class="hljs-comment"># 또는 Command Prompt (cmd) 사용 시</span>
+<span class="hljs-built_in">type</span> nul &gt; .env
+</code></pre>
+    <p>또는 루트 폴더에 직접 <code>.env</code> 파일 생성</p>
+    <p>macOS/Linux</p>
+    <pre><code class="language-bash"><span class="hljs-built_in">touch</span> .<span class="hljs-built_in">env</span>
+</code></pre>
+    <ol start="4">
+        <li>프로젝트 루트 표시 파일 생성</li>
+    </ol>
+    <ul>
+        <li><code>.project_root</code> 빈 파일 생성</li>
+    </ul>
+    <p>Windows</p>
+    <pre><code class="language-powershell"><span class="hljs-comment"># PowerShell 사용 시</span>
+<span class="hljs-built_in">New-Item</span> <span class="hljs-literal">-ItemType</span> File <span class="hljs-literal">-Path</span> .project_root
+
+<span class="hljs-comment"># 또는 Command Prompt (cmd) 사용 시</span>
+<span class="hljs-built_in">type</span> nul &gt; .project_root
+</code></pre>
+    <p>또는 루트 폴더에 직접 <code>.project_root</code> 파일 생성</p>
+    <p>macOS/Linux</p>
+    <pre><code class="language-bash"><span class="hljs-built_in">touch</span> .project_root
+</code></pre>
+    <ol start="5">
+        <li>서버 실행</li>
+    </ol>
+    <pre><code class="language-bash">python3 app.py
+</code></pre>
+    <p>각 컴포넌트는 독립적으로 실행되며, 전체 시스템 작동을 위해서는 세 서버가 모두 실행되어야 합니다.</p>
+    <h1 id="챕터-2-시스템-데이터-흐름-상세-분석">챕터 2. 시스템 데이터 흐름 상세 분석</h1>
+    <h2 id="1-초기-데이터-요청">1. 초기 데이터 요청</h2>
+    <h3 id="a-사용자-버튼-클릭">A. 사용자 버튼 클릭</h3>
+    <pre><code class="language-typescript"><span class="hljs-comment">// src/app/weather/page.tsx</span>
+&lt;button onClick={fetchWeatherData}&gt;날씨 데이터 불러오기&lt;/button&gt;
+</code></pre>
+    <h3 id="b-frontend-api-호출">B. Frontend API 호출</h3>
+    <pre><code class="language-typescript"><span class="hljs-comment">// src/app/weather/page.tsx</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchWeatherData</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&quot;http://localhost:8080/weather&quot;</span>);
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> res.<span class="hljs-title function_">json</span>();
+    <span class="hljs-title function_">setWeatherData</span>(data.<span class="hljs-property">predictions</span>);
+};
+</code></pre>
+    <h3 id="c-backend-중계">C. Backend 중계</h3>
+    <pre><code class="language-kotlin"><span class="hljs-comment">// WeatherController.kt</span>
+<span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/weather&quot;</span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getWeather</span><span class="hljs-params">()</span></span>: String {
+    <span class="hljs-keyword">return</span> restTemplate.getForObject(<span class="hljs-string">&quot;http://localhost:8000/predict&quot;</span>, String::<span class="hljs-keyword">class</span>.java)
+}
+</code></pre>
+    <h2 id="2-모델-체크-및-초기-분기">2. 모델 체크 및 초기 분기</h2>
+    <h3 id="a-모델-존재-확인">A. 모델 존재 확인</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># app.py</span>
+<span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/predict&quot;</span></span>)</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">predict_weather</span>():
+    model, sequence = predictor.model_manager.load_model()
+    <span class="hljs-keyword">if</span> model <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        data = <span class="hljs-keyword">await</span> predictor.data_collector.fetch_data()
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;training&quot;</span>}
+</code></pre>
+    <h3 id="b-학습-필요시-데이터-수집">B. 학습 필요시 데이터 수집</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># data_collector.py</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">fetch_data_async</span>():
+    <span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> aiohttp.ClientSession() <span class="hljs-keyword">as</span> session:
+        tasks = [self._get_monthly_data_async(year, month, session)
+                <span class="hljs-keyword">for</span> year, month <span class="hljs-keyword">in</span> date_range]
+        results = <span class="hljs-keyword">await</span> asyncio.gather(*tasks)
+</code></pre>
+    <h3 id="c-기상청-api-데이터-파싱">C. 기상청 API 데이터 파싱</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># data_collector.py</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">_parse_weather_data</span>(<span class="hljs-params">self, root: ET.Element</span>):
+    data = []
+    <span class="hljs-keyword">for</span> info <span class="hljs-keyword">in</span> root.findall(<span class="hljs-string">&quot;.//info&quot;</span>):
+        row = {
+            <span class="hljs-string">&quot;avg_temp&quot;</span>: safe_float(info.findtext(<span class="hljs-string">&quot;taavg&quot;</span>)),
+            <span class="hljs-string">&quot;max_temp&quot;</span>: safe_float(info.findtext(<span class="hljs-string">&quot;tamax&quot;</span>)),
+            <span class="hljs-string">&quot;min_temp&quot;</span>: safe_float(info.findtext(<span class="hljs-string">&quot;tamin&quot;</span>)),
+            <span class="hljs-string">&quot;humidity&quot;</span>: safe_float(info.findtext(<span class="hljs-string">&quot;avghm&quot;</span>))
+        }
+        data.append(row)
+</code></pre>
+    <h2 id="3-모델-학습-프로세스">3. 모델 학습 프로세스</h2>
+    <h3 id="a-데이터-전처리">A. 데이터 전처리</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># model_manager.py</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">prepare_model_data</span>(<span class="hljs-params">self, df: pd.DataFrame</span>):
+    df_features = df[Config.DATA_FEATURES]
+    scaled_data = self.scaler.fit_transform(df_features)
+    input_sequences = np.array([scaled_data[i:i+sequence_length]
+                              <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(scaled_data)-sequence_length)])
+</code></pre>
+    <h3 id="b-모델-구축">B. 모델 구축</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># predictor.py</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">build_model</span>(<span class="hljs-params">self, input_shape</span>):
+    model = Sequential([
+        LSTM(Config.LSTM_UNITS, return_sequences=<span class="hljs-literal">True</span>),
+        Dropout(Config.DROPOUT_RATE),
+        LSTM(Config.LSTM_UNITS),
+        Dense(input_shape[<span class="hljs-number">1</span>])
+    ])
+</code></pre>
+    <h3 id="c-모델-학습">C. 모델 학습</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># predictor.py</span>
+model.fit(
+    features,
+    targets,
+    epochs=Config.EPOCHS,
+    batch_size=Config.BATCH_SIZE,
+    validation_split=Config.VALIDATION_SPLIT
+)
+</code></pre>
+    <h3 id="d-모델-저장">D. 모델 저장</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># model_manager.py</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">save_model</span>(<span class="hljs-params">self, model, sequence, date</span>):
+    model.save(self.model_file)
+    np.save(self.sequence_file, sequence)
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.last_date_file, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:
+        f.write(date)
+</code></pre>
+    <h2 id="4-예측-수행">4. 예측 수행</h2>
+    <h3 id="a-시퀀스-준비">A. 시퀀스 준비</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># predictor.py</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">predict_future</span>(<span class="hljs-params">self, model, last_sequence, steps</span>):
+    current_sequence = last_sequence.copy()
+</code></pre>
+    <h3 id="b-예측-실행">B. 예측 실행</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># predictor.py</span>
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(steps):
+        next_pred = model.predict(current_sequence.reshape(<span class="hljs-number">1</span>, *current_sequence.shape))
+        predictions.append(next_pred[<span class="hljs-number">0</span>])
+        current_sequence = np.roll(current_sequence, -<span class="hljs-number">1</span>, axis=<span class="hljs-number">0</span>)
+        current_sequence[-<span class="hljs-number">1</span>] = next_pred[<span class="hljs-number">0</span>]
+</code></pre>
+    <h3 id="c-결과-후처리">C. 결과 후처리</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># predictor.py</span>
+    predictions = np.array(predictions)
+    <span class="hljs-keyword">return</span> self.model_manager.scaler.inverse_transform(predictions)
+</code></pre>
+    <h2 id="5-결과-반환-및-표시">5. 결과 반환 및 표시</h2>
+    <h3 id="a-fastapi-응답-생성">A. FastAPI 응답 생성</h3>
+    <pre><code class="language-python"><span class="hljs-comment"># app.py</span>
+    prediction_results = [{
+        <span class="hljs-string">&quot;date&quot;</span>: (last_date + pd.DateOffset(months=i)).strftime(<span class="hljs-string">&quot;%Y-%m&quot;</span>),
+        **{feature: <span class="hljs-built_in">float</span>(value) <span class="hljs-keyword">for</span> feature, value <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(features, pred)}
+    } <span class="hljs-keyword">for</span> i, pred <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(predictions, <span class="hljs-number">1</span>)]
+</code></pre>
+    <h3 id="b-frontend-데이터-표시">B. Frontend 데이터 표시</h3>
+    <pre><code class="language-typescript"><span class="hljs-comment">// src/app/weather/page.tsx</span>
+{weatherData.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{item.date}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{item.date}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{item.avg_temp.toFixed(2)}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{item.max_temp</span> === <span class="hljs-string">maxTemp</span> ? &quot;<span class="hljs-attr">text-red-500</span>&quot; <span class="hljs-attr">:</span> &quot;&quot;}&gt;</span>
+            {item.max_temp.toFixed(2)}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{item.min_temp</span> === <span class="hljs-string">minTemp</span> ? &quot;<span class="hljs-attr">text-blue-500</span>&quot; <span class="hljs-attr">:</span> &quot;&quot;}&gt;</span>
+            {item.min_temp.toFixed(2)}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{item.humidity.toFixed(2)}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
+))}
+</code></pre>
+    <h2 id="6-전체-시스템-흐름도">6. 전체 시스템 흐름도</h2>
+    <pre><code>[초기 요청]
+사용자 → Next.js → Spring Boot → FastAPI
+
+[데이터 수집 &amp; 학습]
+FastAPI
+↓ 모델 없음
+기상청 API 호출
+↓
+데이터 수집 및 파싱
+↓
+데이터 전처리
+↓
+LSTM 모델 구축
+↓
+모델 학습
+↓
+모델 저장
+
+[예측 &amp; 결과 반환]
+FastAPI
+↓
+예측 수행
+↓
+결과 후처리
+↓
+Spring Boot
+↓
+Next.js
+↓
+사용자 화면 표시
+</code></pre>
+    <p>모든 시스템 흐름이 순차적으로 발생하며, 각 단계에서 에러 처리와 로깅이 수행됩니다.</p>
+    <h1 id="챕터-3-서버-포트-및-통신-프로토콜">챕터 3. 서버 포트 및 통신 프로토콜</h1>
+    <h2 id="1-비동기-통신-성능">1. 비동기 통신 성능</h2>
+    <h3 id="기존-동기-방식">기존 동기 방식</h3>
+    <pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">fetch_data</span>():
+    data = []
+    <span class="hljs-keyword">for</span> year, month <span class="hljs-keyword">in</span> date_range:
+        response = requests.get(<span class="hljs-string">f&quot;<span class="hljs-subst">{API_URL}</span>&quot;</span>, params={<span class="hljs-string">&quot;year&quot;</span>: year, <span class="hljs-string">&quot;month&quot;</span>: month})
+        data.append(response.json())
+    <span class="hljs-keyword">return</span> data
+<span class="hljs-comment"># 약 120초 소요 (타임아웃 대기 시간 포함)</span>
+</code></pre>
+    <h3 id="비동기-처리-방식">비동기 처리 방식</h3>
+    <pre><code class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">fetch_data_async</span>():
+    <span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> aiohttp.ClientSession() <span class="hljs-keyword">as</span> session:
+        tasks = [
+            self._get_monthly_data_async(year, month, session)
+            <span class="hljs-keyword">for</span> year, month <span class="hljs-keyword">in</span> date_range
+        ]
+        results = <span class="hljs-keyword">await</span> asyncio.gather(*tasks)
+    <span class="hljs-keyword">return</span> results
+<span class="hljs-comment"># 약 15초 소요 (약 87.5% 성능 향상)</span>
+</code></pre>
+    <h3 id="성능-개선-요인">성능 개선 요인</h3>
+    <ol>
+        <li>
+            <p>동시 요청 처리</p>
+            <ul>
+                <li>매월 데이터를 병렬로 요청</li>
+                <li>세마포어로 동시 요청 수 어 (10개)</li>
+            </ul>
+        </li>
+        <li>
+            <p>타임아웃 최적화</p>
+            <ul>
+                <li>개별 요청 실패 시 즉시 다음 처리</li>
+                <li>존재하지 않는 데이터 요청의 불필요한 대기 시간 제거</li>
+            </ul>
+        </li>
+        <li>
+            <p>메모리 효율성</p>
+            <ul>
+                <li>스트리밍 방식 응답 처리</li>
+                <li>대규모 데이터 효율적 관리</li>
+            </ul>
+        </li>
+    </ol>
+    <h2 id="2-서버-포트-구성">2. 서버 포트 구성</h2>
+    <pre><code>[Next.js Frontend]   : 3000번 포트
+[Spring Boot Server] : 8080번 포트
+[FastAPI Server]     : 8000번 포트
+</code></pre>
+    <h2 id="3-api-엔드포인트">3. API 엔드포인트</h2>
+    <h3 id="frontend--spring-boot">Frontend → Spring Boot</h3>
+    <pre><code>GET http://localhost:8080/weather
+- 날씨 예측 데이터 요청
+</code></pre>
+    <h3 id="spring-boot--fastapi">Spring Boot → FastAPI</h3>
+    <pre><code>GET http://localhost:8000/predict
+- 날씨 예측 데이터 생성 요청
+</code></pre>
+    <h3 id="fastapi--기상청-api">FastAPI → 기상청 API</h3>
+    <pre><code>GET https://apihub.kma.go.kr/api/typ02/openApi/SfcMtlyInfoService/getMmSumry
+- 월별 기상 통계 데이터 요청
+</code></pre>
+    <h2 id="4-cors-설정">4. CORS 설정</h2>
+    <h3 id="spring-boot">Spring Boot</h3>
+    <pre><code class="language-kotlin"><span class="hljs-meta">@CrossOrigin(origins = [<span class="hljs-string">&quot;http://localhost:3000&quot;</span>])</span>  <span class="hljs-comment">// Next.js 서버 허용</span>
+</code></pre>
+    <h3 id="fastapi">FastAPI</h3>
+    <pre><code class="language-python">app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[<span class="hljs-string">&quot;http://localhost:8080&quot;</span>],  // Spring Boot 서버 허용
+    allow_methods=[<span class="hljs-string">&quot;GET&quot;</span>],
+    allow_headers=[<span class="hljs-string">&quot;*&quot;</span>]
+)
+</code></pre>
+    <h2 id="5-데이터-형식">5. 데이터 형식</h2>
+    <h3 id="요청응답-포맷">요청/응답 포맷</h3>
+    <pre><code class="language-json"><span class="hljs-comment">// 예측 결과 응답 형식</span>
+<span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;success&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;predictions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;date&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2024-04&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;avg_temp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12.5</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;max_temp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">18.3</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;min_temp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6.7</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;humidity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">65.4</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        ...
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// 학습 상태 응답 형식</span>
+<span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;training&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Model training in progress&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+    <h2 id="6-에러-응답-형식">6. 에러 응답 형식</h2>
+    <pre><code class="language-json"><span class="hljs-comment">// HTTP 에러 응답</span>
+<span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;error&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;detail&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Error message description&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+    <h2 id="7-보안-설정">7. 보안 설정</h2>
+    <ul>
+        <li>기상청 API 키는 환경 변수로 관리 (.env)</li>
+        <li>API 요청 간 CORS 정책 엄격히 적용</li>
+        <li>Spring Boot 서버가 API Gateway 역할 수행</li>
+    </ul>
+    <h2 id="8-통신-타임아웃-설정">8. 통신 타임아웃 설정</h2>
+    <pre><code class="language-python"><span class="hljs-comment"># FastAPI 클라이언트 설정</span>
+timeout = aiohttp.ClientTimeout(
+    total=Config.API_TIMEOUT,  <span class="hljs-comment"># 전체 요청 타임아웃 (10초)</span>
+    connect=Config.API_CONNECT_TIMEOUT  <span class="hljs-comment"># 연결 타임아웃 (5초)</span>
+)
+</code></pre>
+    <pre><code class="language-kotlin"><span class="hljs-comment">// Spring Boot RestTemplate 설정</span>
+restTemplate.setRequestFactory(clientHttpRequestFactory())
+<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">clientHttpRequestFactory</span><span class="hljs-params">()</span></span>: ClientHttpRequestFactory {
+    <span class="hljs-keyword">val</span> factory = SimpleClientHttpRequestFactory()
+    factory.setConnectTimeout(<span class="hljs-number">5000</span>)  <span class="hljs-comment"># 5초</span>
+    factory.setReadTimeout(<span class="hljs-number">10000</span>)    <span class="hljs-comment"># 10초</span>
+    <span class="hljs-keyword">return</span> factory
+}
+</code></pre>
+    <h2 id="9-재시도-정책">9. 재시도 정책</h2>
+    <pre><code class="language-python"><span class="hljs-comment"># FastAPI 재시도 설정</span>
+API_RETRY_ATTEMPTS = <span class="hljs-number">3</span>     <span class="hljs-comment"># 최대 재시도 횟수</span>
+API_RETRY_DELAY = <span class="hljs-number">2</span>        <span class="hljs-comment"># 재시도 간 대기 시간(초)</span>
+</code></pre>
+    <p>모든 통신은 HTTP/HTTPS 프로토콜을 사용하며, JSON 형식으로 데이터를 교환합니다. 각 서버는 독립적으로 실행되며, 명확한 포트 할당과 CORS 정책으로 안전한 통신을 보장합니다. 특히 비동기
+        처리를 통해 데이터 수집 시간을 대폭 단축하여 시스템의 전반적인 응답성을 크게 향상시켰습니다.</p>
+    <h1 id="챕터-4-결론">챕터 4. 결론</h1>
+    <h2 id="1-구현-성과">1. 구현 성과</h2>
+    <h3 id="msa-아키텍처-구축">MSA 아키텍처 구축</h3>
+    <ul>
+        <li>FastAPI: ML 모델 및 데이터 처리</li>
+        <li>Spring Boot: API 게이트웨이</li>
+        <li>Next.js: 사용자 인터페이스</li>
+        <li>각 서비스의 독립적 운영/배포 가능</li>
+    </ul>
+    <h3 id="성능-최적화">성능 최적화</h3>
+    <ul>
+        <li>비동기 처리로 데이터 수집 시간 단축 (120초 → 15초)</li>
+        <li>불필요한 타임아웃 대기 시간 제거</li>
+        <li>세마포어를 통한 동시 요청 제어</li>
+    </ul>
+    <h3 id="예측-시스템-구현">예측 시스템 구현</h3>
+    <ul>
+        <li>LSTM 기반 12개월 기상 예측</li>
+        <li>자동 학습 및 모델 관리</li>
+        <li>4개 기상 변수 예측 (평균기온, 최고기온, 최저기온, 습도)</li>
+    </ul>
+    <h2 id="2-기술적-특징">2. 기술적 특징</h2>
+    <h3 id="비동기-처리">비동기 처리</h3>
+    <ul>
+        <li>aiohttp를 활용한 병렬 데이터 수집</li>
+        <li>동시 요청으로 처리 효율 향상</li>
+        <li>스트리밍 방식의 데이터 처리</li>
+    </ul>
+    <h3 id="에러-처리">에러 처리</h3>
+    <ul>
+        <li>각 계층별 예외 처리</li>
+        <li>재시도 메커니즘 구현</li>
+        <li>사용자 피드백 제공</li>
+    </ul>
+    <h3 id="보안">보안</h3>
+    <ul>
+        <li>API 키 환경변수 관리</li>
+        <li>CORS 정책 적용</li>
+        <li>API 게이트웨이 패턴 적용</li>
+    </ul>
+
+
+
+</body>
+
+</html>

@@ -1,8 +1,11 @@
-"""
-Weather data collection module for climate prediction.
+# path : models/weather/data_collector.py
+# description : 날씨 예측을 위한 데이터 수집 모듈
 
-This module provides functionality to collect historical weather data
-from a public weather API and process it for model training.
+"""
+날씨 예측을 위한 데이터 수집 모듈입니다.
+
+이 모듈은 공공 날씨 API에서 과거 날씨 데이터를 수집하고
+모델 학습을 위해 처리하는 기능을 제공합니다.
 """
 
 import asyncio

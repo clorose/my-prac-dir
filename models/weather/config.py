@@ -1,6 +1,5 @@
-# File: C:\gaon\2024\weather\config.py
-# Purpose: [Describe the purpose of this file]
-# 신버전
+# path : models/weather/config.py
+# description : 날씨 예측 API 서버 환경 설정
 
 import os
 from dotenv import load_dotenv

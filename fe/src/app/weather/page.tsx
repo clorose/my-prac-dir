@@ -1,3 +1,6 @@
+// path : src/app/weather/page.tsx
+// description : 날씨 예측 페이지
+
 "use client";
 import { useState } from "react";
 

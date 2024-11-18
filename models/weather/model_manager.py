@@ -1,8 +1,11 @@
-"""
-Model management module for climate prediction.
+# path : models/weather/model_manager.py
+# description : 날씨 예측을 위한 모델 관리 모듈
 
-This module handles model persistence, data preparation, and model lifecycle
-management including saving and loading trained models, sequences, and scalers.
+"""
+기후 예측을 위한 모델 관리 모듈.
+
+이 모듈은 학습된 모델, 시퀀스, 스케일러의 저장 및 로딩을 포함한
+모델 지속성, 데이터 준비, 모델 수명주기 관리를 처리합니다.
 """
 
 import logging
