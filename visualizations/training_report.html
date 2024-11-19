@@ -1,0 +1,86 @@
+
+        <html>
+        <head>
+            <title>MNIST Training Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+                .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+                .metric { padding: 20px; background: #f5f5f5; border-radius: 5px; text-align: center; }
+                .metric h3 { color: #333; margin-top: 0; }
+                .metric p { font-size: 24px; margin: 10px 0; color: #2196F3; }
+                img { max-width: 100%; height: auto; margin: 10px 0; }
+                pre { white-space: pre-wrap; background: #f5f5f5; padding: 15px; border-radius: 5px; }
+            </style>
+        </head>
+        <body>
+            <h1>MNIST 학습 결과 리포트</h1>
+            <div class="section">
+                <h2>학습 요약</h2>
+                <div class="grid">
+                    <div class="metric">
+                        <h3>최종 정확도</h3>
+                        <p>0.9887</p>
+                    </div>
+                    <div class="metric">
+                        <h3>최종 손실값</h3>
+                        <p>0.0492</p>
+                    </div>
+                    <div class="metric">
+                        <h3>총 에포크</h3>
+                        <p>10</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>학습 과정 시각화</h2>
+                <img src="training_history.png" alt="Training History" />
+                <p>파란색: 학습 데이터, 주황색: 검증 데이터</p>
+            </div>
+
+            <div class="section">
+                <h2>샘플 이미지 예측</h2>
+                <img src="sample_images.png" alt="Sample Predictions" />
+            </div>
+
+            <div class="section">
+                <h2>혼동 행렬</h2>
+                <img src="confusion_matrix.png" alt="Confusion Matrix" />
+                <p>행: 실제 클래스, 열: 예측 클래스</p>
+            </div>
+
+            <div class="section">
+                <h2>모델 구조</h2>
+                <pre>Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ conv2d (Conv2D)                      │ (None, 26, 26, 32)          │             320 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d (MaxPooling2D)         │ (None, 13, 13, 32)          │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_1 (Conv2D)                    │ (None, 11, 11, 64)          │          18,496 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_1 (MaxPooling2D)       │ (None, 5, 5, 64)            │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ flatten (Flatten)                    │ (None, 1600)                │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 64)                  │         102,464 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_1 (Dense)                      │ (None, 10)                  │             650 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 365,792 (1.40 MB)
+ Trainable params: 121,930 (476.29 KB)
+ Non-trainable params: 0 (0.00 B)
+ Optimizer params: 243,862 (952.59 KB)
+</pre>
+            </div>
+
+            <div class="section">
+                <h2>생성 시간</h2>
+                <p>2024-11-19 14:55:17</p>
+            </div>
+        </body>
+        </html>
+        
