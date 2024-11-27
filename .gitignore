@@ -456,3 +456,20 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/python,kotlin,react,nextjs
+
+# Models
+models/
+*.pt
+
+# Run results
+runs/
+predict/
+
+# Python
+.python-version
+__pycache__/
+*.pyc
+
+# Old/backup files
+old/
+*.old
