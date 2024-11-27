@@ -1,0 +1,42 @@
+# fpath: Dockerfile.dev
+
+FROM --platform=$TARGETPLATFORM python:3.11-slim
+
+# 시스템 패키지 설치
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  libgl1-mesa-glx \
+  libglib2.0-0 \
+  libpng-dev \
+  libjpeg-dev \
+  curl \
+  git \
+  vim \
+  zsh \
+  && rm -rf /var/lib/apt/lists/*
+
+# Poetry 설치 및 설정
+ENV POETRY_HOME="/opt/poetry"
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
+ENV POETRY_NO_INTERACTION=1
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH="/opt/poetry/bin:$PATH"
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# 프로젝트 파일 복사
+COPY . /app/
+
+# Poetry를 통해 의존성 설치
+RUN poetry install --no-root
+
+# 볼륨 마운트 디렉토리 준비
+RUN mkdir -p /app/data /app/runs \
+  && chmod 777 /app/data /app/runs
+
+# 디버깅 및 개발 환경 변수 설정
+ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH="/app:$PYTHONPATH"
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
