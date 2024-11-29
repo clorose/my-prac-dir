@@ -1,0 +1,35 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./runs:/app/runs
+      - pdm-cache:/root/.cache/pdm
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
+
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    volumes:
+      - ./data:/app/data
+      - ./runs:/app/runs
+    command: pdm run python src/main.py
+
+volumes:
+  pdm-cache:
