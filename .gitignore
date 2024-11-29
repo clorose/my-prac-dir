@@ -182,3 +182,10 @@ models/
 
 *research*.md
 *research*.html
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
