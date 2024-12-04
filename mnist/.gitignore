@@ -1,0 +1,137 @@
+# 의존성
+/node_modules
+/.pnp
+.pnp.js
+
+# 테스팅
+/coverage
+
+# 프로덕션 빌드
+/build
+/dist
+
+# 환경 변수
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 로그
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# IDE 및 편집기
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+*.iml
+*.iws
+*.ipr
+.vs/
+.nvimlog
+*.kate-swp
+
+# OS 생성 파일
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# 추가적인 무시 항목
+# 임시 파일
+*.tmp
+*.temp
+.cache/
+.eslintcache
+
+# 백업 파일
+*.bak
+*.backup
+*.rej
+
+# 패키지 매니저
+yarn.lock
+package-lock.json
+.yarn/
+.yarnrc
+.npm/
+.npmrc
+
+# Next.js
+.next/
+
+# 프론트엔드 관련 추가 항목
+.parcel-cache/
+*.module.scss.d.ts
+
+# Python 관련
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+*.ipynb~
+*/.ipynb_checkpoints/*
+
+# 데이터셋
+mnist_png/
+datasets/
+data/
+*.csv
+*.dat
+*.npy
+*.h5
+*.pkl
+*.npz
+
+# 대용량 미디어 파일
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.mov
+*.avi
+*.weights
+*.pt
+*.pth
+*.ckpt
+
+# 모델 파일
+saved_models/
+checkpoints/
+runs/
+wandb/
+logs/
+
+# Docker 관련
+docker-compose.override.yml
+*.tar
+
+# Bazel 관련
+bazel-out/
+bazel-bin/
+bazel-testlogs/
+
+# 터미널 관련
+.zsh_history
+.bash_history
