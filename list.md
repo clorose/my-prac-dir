@@ -30,7 +30,7 @@ OPC UA 통신 연습용 프로젝트. 이 프로젝트로 인해 레포지토리
 ### whisper → speech-to-text-models
 음성 인식 프로젝트. MP4 파일을 사용하여 음성을 텍스트로 변환함. OpenAI의 Whisper 모델이 Facebook의 wav2vec2 모델보다 뛰어난 인식률을 보임. wav2vec2는 WAV 파일이 아닌 MP4를 사용해서 인식률이 낮았을 수도 있음. 프로젝트의 목적과 내용을 더 명확히 표현하기 위해 이름을 변경함.
 
-### Yolo8
+### Yolo8 -> YOLO-ObjectDetector
 YOLO(You Only Look Once) 모델을 활용한 이미지 인식 프로젝트. 이 프로젝트에서 처음으로 Docker를 사용함. Poetry가 PyTorch와 호환이 잘 되지 않아 여러 시도 끝에 Docker로 전환했더니 문제가 해결됨. Python 3.12와 YOLO11을 사용해볼걸 하는 아쉬움이 남음.
 
 ## 기술 스택 발전 과정
@@ -42,3 +42,4 @@ YOLO(You Only Look Once) 모델을 활용한 이미지 인식 프로젝트. 이 
 - 레포지토리 이름을 더 명확하고 일관성 있게 정리 (완료)
 - 각 프로젝트의 README 보완
 - 최신 기술 스택 적용 고려 (Python 3.12, 최신 모델 등)
+- tensorflow -> pytorch로 전환(최신 트렌드가 tensorflow에서 pytorch로 바뀌고 있음)
